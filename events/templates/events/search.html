@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends "events/base.html"%} {% block content%}
+<center>
+  {% if searched %}
+  <h2>you searched for {{searched}}</h2>
+  {% if locations%}
+  <ul class="list-group">
+    <li class="list-group-item"><strong>results for locations</strong></li>
+    {%for location in locations%}
+    <li class="list-group-item">
+      <a href="{%url 'show-location' location.id return_page%}"
+        >{{location.name}}</a
+      >
+    </li>
+
+    {%endfor%} {%else%}
+    <li class="list-group-item">no results in location</li>
+    {%endif%} {%if events%}
+    <br />
+    <li class="list-group-item"><strong>results for events</strong></li>
+
+    {%for event in events%}
+    <li class="list-group-item">
+      <a href="{%url 'show-event' event.id return_page %}">{{event}}</a>
+    </li>
+    {% endfor%} {%else%}
+    <li class="list-group-item">no results in events</li>
+    {%endif%}
+  </ul>
+
+  <br />
+  {%else%}
+  <h1>please enter search term</h1>
+
+  {% endif %}
+</center>
+
+{% endblock %}

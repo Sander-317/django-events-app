@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% extends "events/base.html" %} {%block content %}
+<div></div>
+{% if user.is_authenticated%}
+
+<center>
+  <h1>Add location</h1>
+  <br />
+
+  <br />
+  {% if submitted%}
+  <h1>location was added successfully!!</h1>
+  {%else%}
+  <form action="" method="post" enctype="multipart/form-data">
+    {%csrf_token%} {{form.as_p}}
+
+    <input type="submit" value="Add location" class="btn btn-primary" />
+  </form>
+  {% endif%}
+</center>
+{% else %} {% include 'events/not_logged_in.html' %} {% endif %}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+{% endblock%}

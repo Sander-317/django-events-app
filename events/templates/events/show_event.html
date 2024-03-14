@@ -1,0 +1,58 @@
+<!DOCTYPE html> {% extends "events/base.html" %} {% block content%}
+<center>
+
+  <div class="card" style="width: 18rem">
+    {% if event.event_image %}
+    <img src="{{event.event_image.url}}" class="card-img-top" alt="..." />
+      
+    {% endif %}
+    
+    <div class="card-body">
+      <h5 class="card-title card-header">{{event}}</h5>
+      
+      <p class="card-text text-start">
+        <p class="text-start"> {{event.event_date}}</p>
+        {% if event.Days_Till == "0:00:00"%}
+        <p class="text-start"> countdown: today</p>
+        
+        {% else %}
+        <p class="text-start">countdown: {{event.Days_Till}} </p>
+        {% endif %}
+        <p class="text-start">location: <a href="{%url 'show-location' event.location.id return_page%}">{{event.location}}</a></p>
+        
+        <p class="text-start">owner: {{event.manager}}</p>
+       
+        <p class="text-start">description:</p>
+        <p class="text-start">{{event.description}}</p>
+        
+        
+        <p class="text-start">attendees: {{event.attendees.count}}</p> 
+        
+         
+      </p>
+      <div class="card-footer text-body-secondary">
+        
+        <a href="{% url 'update-event' event.id return_page%}" class="btn btn-outline-secondary btn-sm"
+          ><i class="bi bi-pencil"></i></a
+        >
+        <a
+        href="{%url 'delete-event' event.id return_page%}"
+        class="btn btn-outline-danger btn-sm"
+        ><i class="bi bi-trash3"></i
+      ></a>
+      </div>
+    </div>
+
+  </div>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+
+
+
+
+
+</center>
+{%endblock%}

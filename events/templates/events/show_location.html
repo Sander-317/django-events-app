@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% extends "events/base.html"%} {% block content%}
+<center>
+  <div class="card" style="width: 18rem">
+    {% if location.location_image %}
+    <img src="{{location.location_image.url}}" class="card-img-top" alt="..." />
+      
+    {% endif %}
+    
+    <div class="card-body">
+      <h5 class="card-title card-header">{{location}}</h5>
+      <p class="card-text text-start">
+        <p class="text-start">address: {{location.address}}</p>
+        <p class="text-start">zip code: {{location.zip_code}}</p>
+        {% if location_owner %}
+        <p class="text-start">owner: {{location_owner}}</p>
+        {% else %}
+
+        <li class="text-start">owner: Public</li>
+        {% endif %}
+        <p class="text-start"><i class="bi bi-telephone"></i> {{location.phone_number}}</p>
+        {% if location.website %}
+        <p class="text-start"><i class="bi bi-globe"></i> {{location.website}}</p> 
+          
+        {% endif %} 
+        <p class="text-start"><i class="bi bi-envelope"></i> {{location.email}}</p> 
+        
+         
+      </p>
+      <div class="card-footer text-body-secondary ">
+        {% if user == location.owner %}
+          
+          <a
+          href="{%url 'update-location' location.id return_page%}"
+          class="btn btn-outline-secondary btn-sm"
+          ><i class="bi bi-pencil"></i
+            ></a
+          >
+          <a
+          href="{%url 'delete-location' location.id return_page%}"
+          class="btn btn-outline-danger btn-sm"
+          ><i class="bi bi-trash3"></i
+            ></a
+          >
+          {% endif %}
+          
+      </div>
+    </div>
+
+  </div>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+
+</center>
+
+{% endblock %}

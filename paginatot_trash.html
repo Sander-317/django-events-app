@@ -1,0 +1,18 @@
+<!-- came before the ofr loop -->
+{% if pages.number|add: "-2" > 1 %}
+<li><a class="page-link active" href="?page={{pages.number|add:"-2" > 1}}">&hellip</a></li>
+{% elif page > pages.number|add:"-2" and page < pages.number|add:"-2" %}
+<li><a class="page-link" href="?page={{pages.next_page_number}}"></a></li>
+
+{% endif %} 
+
+<!-- came after the for loop  -->
+
+    
+
+{% if pages.paginator.num_pages > pages.number|add:"-2" %}
+<li><a class="page-link" href="?page={{pages.number|add:"-2"}}">&hellip</a></li>
+<li><a  href="?page={{page}}">{{page}}</a></li>
+<li><a class="page-link" href="?page={{pages.paginator.num_pages}}"></a>{{pages.paginator.num_pages}}</li>
+    
+{% endif %}

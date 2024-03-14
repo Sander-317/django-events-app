@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+{% extends "events/base.html" %}
+<!--  -->
+{%block content %}
+<center>
+  {% if user.is_authenticated%}
+  <div class="card">
+    <div class="card-header">
+      info: attending events = {{attending_events.count}} planned events =
+      {{planned_events.count}} owned locations = {{owned_location.count}}
+    </div>
+    <!-- <div class="card-body">
+    <p class="card-text">attending events = {{attending_events.count}}</p>
+    <p class="card-text">planned events = {{planned_events.count}}</p>
+    <p class="card-text">owned locations = {{owned_location.count}}</p>
+  </div> -->
+  </div>
+  <br />
+  <br />
+  <h2>events attended by {{user}}</h2>
+  <!--  -->
+  {% if attending_events %}
+  <br />
+
+  <table class="table">
+    <thead>
+      <tr></tr>
+    </thead>
+    <tbody>
+      {% for event in attending_events %}
+      <tr>
+        <td>
+          <a href="{%url 'show-event' event.id return_page%}">{{event.name}}</a>
+        </td>
+        <td>{{event.event_date}}</td>
+        <td align="right">
+          <!--  -->
+          {% if event in attending_events %}
+          <a
+            href="{%url 'cancel-event' event.id return_page %}"
+            class="btn btn-outline-warning btn-sm"
+            >un attend</a
+          >
+
+          {% endif %}
+          <!--  -->
+
+          <!-- {% if user == event.manager %}
+          <a
+            href="{%url 'update-event' event.id return_page%}"
+            class="btn btn-outline-secondary btn-sm"
+            ><i class="bi bi-pencil"></i>
+          </a>
+          <a
+            href="{%url 'delete-event' event.id return_page%}"
+            class="btn btn-outline-danger btn-sm"
+            ><i class="bi bi-trash3"></i
+          ></a>
+          {% endif %} -->
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>you did not attend any events</p>
+  {% endif %}
+
+  <br />
+  <br />
+  <h2>events planned by {{user}}</h2>
+  {% if planned_events %}
+  <br />
+
+  <table class="table">
+    <thead>
+      <tr></tr>
+    </thead>
+    <tbody>
+      {% for event in planned_events %}
+      <tr>
+        <td>
+          <a href="{%url 'show-event' event.id return_page%}">{{event.name}}</a>
+        </td>
+        <td></td>
+
+        <td align="right">
+          {% if event.attendees.count != 0 %}
+          <a
+            class="btn btn-outline-success btn-sm"
+            href="{%url 'attendees-by-location' event.id%}"
+            >show {{event.attendees.count}} attendees</a
+          >
+          {% else %}
+          <a class="btn btn-outline-secondary btn-sm">no attendees</a>
+          {% endif %}
+        </td>
+        <!-- <td align="right" class="btn btn-outline-secondary btn-sm">
+        </td> -->
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% else %}
+  <p>no events planned</p>
+  {% endif %}
+  <br />
+  <br />
+  <!--  -->
+  <h1>locations owned by {{user}}</h1>
+  {% if owned_location %}
+  <br />
+
+  <table class="table">
+    <thead>
+      <tr>
+        <!-- <th scope="col">location name</th>
+
+        <th scope="col">events</th> -->
+      </tr>
+    </thead>
+    {% for location in owned_location %}
+    <tbody>
+      <tr>
+        <td>
+          <a href="{%url 'show-location' location.id return_page%}"
+            >{{location.name}}</a
+          >
+        </td>
+        <td align="right">
+          <a
+            href="{%url 'events-by-location' location.id return_page %}"
+            class="btn btn-outline-success btn-sm"
+          >
+            show events
+          </a>
+        </td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>you own no locations</p>
+  {% endif %}
+</center>
+{% endif %}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<!--  -->
+{%endblock%}

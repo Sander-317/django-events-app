@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% block content %}
+
+<!--  -->
+<!-- {% include "events/paginator.html" %} -->
+<table class="table table-striped table-hover table-bordered">
+  <thead>
+    <tr>
+      <!-- <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    {% for location in pages %}
+    <tr>
+      <td>
+        <a href="{%url 'show-location' location.id return_page%}"
+          >{{location.name}}</a
+        >
+      </td>
+
+      {% if user.is_authenticated %}
+      <!--  -->
+      {% if user == location.owner %}
+
+      <td align="right">
+        <a
+          href="{%url 'update-location' location.id return_page%}"
+          class="btn btn-outline-secondary btn-sm"
+          ><i class="bi bi-pencil"></i
+        ></a>
+        <a
+          href="{%url 'delete-location' location.id return_page%}"
+          class="btn btn-outline-danger btn-sm"
+          ><i class="bi bi-trash3"></i
+        ></a>
+      </td>
+      {% endif %} {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% include "events/paginator.html" %}
+<!--  -->
+{% endblock content %}

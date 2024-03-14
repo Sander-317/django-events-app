@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% block content %}
+<table class="table table-striped table-hover table-bordered">
+  <thead></thead>
+
+  <!-- {% include "events/paginator.html" %} -->
+
+  <!-- 
+
+   -->
+  {%for event in pages%}
+  <!--  -->
+  {% if event.Is_Past == "up cumming" %}
+
+  <tr>
+    <!--  -->
+    {% if user.is_authenticated %}
+    <td align="left">
+      <!--  -->
+      {% if event in current_user_events %}
+      <a
+        href="{%url 'cancel-event' event.id return_page %}"
+        class="btn btn-outline-warning btn-sm"
+        >un attend</a
+      >
+      {% else %}
+      <a
+        href="{%url 'attend-event' event.id return_page %}"
+        class="btn btn-outline-success btn-sm"
+        >attend</a
+      >
+      {% endif %}
+    </td>
+    {% endif %}
+    <td>{{event.event_date}}</td>
+    {% if user.is_authenticated %}
+    <td>
+      <a href="{%url 'show-event' event.id return_page%}">{{event.name}}</a>
+    </td>
+    {% else %}
+    <td>{{event.name}}</td>
+    {% endif %}
+    <!--  -->
+    {% if event.Days_Till == "0:00:00"%}
+    <td>today</td>
+    {% else %}
+    <td>{{event.Days_Till}} till event</td>
+    {% endif %}
+    <!-- <td>{{event.Days_till}} till event</td> -->
+
+    <!-- <td>event status :{{event.Is_Past}}</td> -->
+    <!-- <td>approved: {{event.approved}}</td> -->
+    {% if user.is_authenticated %}
+
+    <td align="right">
+      <!--  -->
+      {% if user == event.manager %}
+      <a
+        href="{%url 'update-event' event.id return_page%}"
+        class="btn btn-outline-secondary btn-sm"
+        ><i class="bi bi-pencil"></i>
+      </a>
+      <a
+        href="{%url 'delete-event' event.id return_page%}"
+        class="btn btn-outline-danger btn-sm"
+        ><i class="bi bi-trash3"></i
+      ></a>
+      {% endif %}
+    </td>
+    {% endif %}
+  </tr>
+  {% else %} {% endif %}
+  <!--  -->
+  {%endfor%}
+</table>
+{% if show_pagination %}
+<!--  -->
+{% include "events/paginator.html" %}
+<!--  -->
+{% endif %}
+<!--  -->
+{% endblock content %}

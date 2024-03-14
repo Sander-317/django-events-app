@@ -1,0 +1,6 @@
+name,address,zip_code,phone_number,website,email
+example location, examplestreet 1,1234aa, 020-123456 ,http://www.examplelacation.nl,lacationd@example.nl
+example location2, examplestreet 2,1234aa, 020-123456 ,http://www.examplelacation2.nl,lacationd2@example.nl
+example location3, examplestreet 3,1234aa, 020-123456 ,http://www.examplelacation3.nl,lacationd3@example.nl
+example location4, examplestreet 4,1234aa, 020-123456 ,http://www.examplelacation4.nl,lacationd4@example.nl
+example location5, examplestreet 5,1234aa, 020-123456 ,http://www.examplelacation5.nl,lacationd5@example.nl

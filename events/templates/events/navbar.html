@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+  <!-- <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark"> -->
+
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home'%}">
+      <i class="bi bi-house-door"></i>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        {% if user.is_authenticated %}
+
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="{% url 'my-dashboard'%}"
+            >my dashboard</a
+          >
+        </li>
+        {% endif %} {% if user.is_superuser %}
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="{% url 'home' '2050' 'january'%}"
+            >to 2050</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="{% url 'admin-panel'%}"
+            >admin panel</a
+          >
+        </li>
+        {% endif %}
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            events
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="{% url 'list-events'%}">events</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a
+                class="dropdown-item"
+                aria-current="page"
+                href="{% url 'my-events'%}"
+                >my events</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'add-event'%}">add event</a>
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+        {% if user.is_authenticated %}
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Location
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="{% url 'list-locations'%}"
+                >Location</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'my-location'%}"
+                >my locations</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'add-location'%}"
+                >Add location</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </li>
+
+        {% if user.is_authenticated %}
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            download
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="{% url 'location-txt'%}"
+                >Location text file</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'location-csv' %}"
+                >location csv file</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="{% url 'location-pdf'%}"
+                >location pdf file</a
+              >
+            </li>
+          </ul>
+        </li>
+        {% endif %}
+      </ul>
+      <ul class="navbar-nav mb-2 mb-lg-0 d-flex">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout'%}">
+            <button type="button" class="btn btn-outline-secondary">
+              logout
+            </button></a
+          >
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'create_user'%}"
+            ><button type="button" class="btn btn-outline-primary">
+              create account
+            </button></a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'login'%}"
+            ><button type="button" class="btn btn-outline-primary">
+              login
+            </button></a
+          >
+        </li>
+        {% endif %}
+      </ul>
+      {% if user.is_authenticated %}
+      <form
+        class="d-flex"
+        role="search"
+        method="POST"
+        action="{% url 'search-location'  %}"
+      >
+        {% csrf_token %}
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+          name="searched"
+        />
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% extends "events/base.html" %} {%block content %}
+<center>
+  {% if user.is_authenticated %}
+  <h1>events</h1>
+  {% else %}
+  <h1>events</h1>
+  <p>if you wanna join or see event create an account</p>
+  {% endif %}
+  <!--  -->
+  {% include 'events/table_events.html' %}
+</center>
+<br />
+
+{% endblock%}

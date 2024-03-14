@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+{% extends "events/base.html"%} {% block content%}
+<div></div>
+{% if user.is_authenticated %}
+
+<h1>update location</h1>
+
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %} {{form.as_p}}
+  <br />
+  <input type="submit" value="Update location" class="btn btn-primary" />
+</form>
+{% else %} {% include 'events/not_logged_in.html' %} {% endif %} {% endblock %}

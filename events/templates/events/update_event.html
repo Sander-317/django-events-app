@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% extends "events/base.html"%} {% block content%}
+
+<div></div>
+{% if user.is_authenticated %}
+<div></div>
+{% if user == event.manager %}
+
+<h1>update event</h1>
+logged in user: {{user}}
+<br />
+event manager: {{event.manager}}
+
+<form action="" method="POST" enctype="multipart/form-data">
+  {% csrf_token %} {{form.as_p}}
+  <br />
+  <input type="submit" value="Update location" class="btn btn-primary" />
+</form>
+{% else %}
+<h1>you are not the manager you cant change the event</h1>
+{% endif %}
+<div></div>
+{% else %} {%include 'events/not_logged_in.html' %}
+<div></div>
+{% endif %}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+{% endblock %}
